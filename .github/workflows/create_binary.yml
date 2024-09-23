@@ -35,11 +35,11 @@ jobs:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
                 tag_name: ${{ github.event.inputs.releaseTag }}
-                name: ${{ github.event.inputs.releaseTitle }}
+                release_name: ${{ github.event.inputs.releaseTitle }}
                 body: ${{ github.event.inputs.releaseDescription }}
                 prerelease: ${{ github.event.inputs.releasePreRelease }}
                 draft: false
-                make_latest: true
+                owner: Polskie Towarzystwo Rakietowe
         
     build_release:
         name: Build release
@@ -47,7 +47,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                targets: [ttgo-t-beam-sx1278, ttgo-t-beam-sx1276, ttgo-t-beam-sx1262, ttgo-t3-v1_3-sx1278, ttgo-t3-v1_3-sx1276, ttgo-t3-v1_6-sx1278, ttgo-t3-v1_6-sx1276]
+                targets: [ttgo-t-beam, ttgo-t-beam, ttgo-t-beam, ttgo-t3-v1_3-sx1278, ttgo-t3-v1_3-sx1276, ttgo-t3-v1_6-sx1278, ttgo-t3-v1_6-sx1276]
         steps:
           # Checkout repository
           - name: Checkout code
