@@ -46,7 +46,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                targets: [ttgo-t-beam, ttgo-t-beam, ttgo-t-beam, ttgo-t3-v1_3-sx1278, ttgo-t3-v1_3-sx1276, ttgo-t3-v1_6-sx1278, ttgo-t3-v1_6-sx1276]
+                targets: [ttgo-t-beam, ttgo-t-beama]
         steps:
           # Checkout repository
           - name: Checkout code
