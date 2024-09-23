@@ -39,7 +39,6 @@ jobs:
                 body: ${{ github.event.inputs.releaseDescription }}
                 prerelease: ${{ github.event.inputs.releasePreRelease }}
                 draft: false
-                owner: Polskie Towarzystwo Rakietowe
         
     build_release:
         name: Build release
