@@ -22,7 +22,7 @@ on:
                 description: 'Is this a prerelease?'
             
 jobs:
-    create-release:
+    create_release:
         name: Create Release
         runs-on: ubuntu-latest
         outputs:
@@ -41,7 +41,7 @@ jobs:
                 draft: false
                 make_latest: true
         
-    build-release:
+    build_release:
         name: Build release
         needs: create_release
         runs-on: ubuntu-latest
