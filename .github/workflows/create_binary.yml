@@ -86,7 +86,7 @@ jobs:
           - name: Compress
             shell: bash
             run: |
-              cd ./build/${{ matrix.targets }}
+              cd ./.pio/build/${{ matrix.targets }}/
               mkdir ../artifact
               zip -r ../artifact/ptr_gs_firmware_${{ matrix.targets }}_${{ github.event.inputs.releaseTag }}.zip *
           
@@ -96,6 +96,6 @@ jobs:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
               upload_url: ${{ needs.create_release.outputs.upload_url }}
-              asset_path: ./build/artifact/ptr_gs_firmware_${{ matrix.targets }}_${{ github.event.inputs.releaseTag }}.zip
+              asset_path: ./.pio/build/${{ matrix.targets }}/artifact/ptr_gs_firmware_${{ matrix.targets }}_${{ github.event.inputs.releaseTag }}.zip
               asset_name: ptr_gs_firmware_${{ matrix.targets }}_${{ github.event.inputs.releaseTag }}.zip
               asset_content_type: application/zip
