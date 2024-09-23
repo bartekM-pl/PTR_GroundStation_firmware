@@ -83,11 +83,19 @@ jobs:
                   esptool.py --chip ESP32 merge_bin -o flash.bin --flash_mode dio --flash_size 4MB 0x1000 bootloader.bin 0x8000 partitions.bin 0x10000 firmware.bin 0x210000 spiffs.bin
                   mv flash.bin ptr_gs_firmware_${{ matrix.targets }}_${{ github.event.inputs.releaseTag }}.bin
                   
+          - name: Compress
+            shell: bash
+            run: |
+              cd ./build/${{ matrix.targets }}
+              mkdir ../artifact
+              zip -r ../artifact/ptr_gs_firmware_${{ matrix.targets }}_${{ github.event.inputs.releaseTag }}.zip *
+          
           - name: Upload
             uses: actions/upload-release-asset@v1
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
               upload_url: ${{ needs.create_release.outputs.upload_url }}
-              asset_path: ./.pio/build/${{ matrix.targets }}/ptr_gs_firmware_${{ matrix.targets }}_${{ github.event.inputs.releaseTag }}.bin
-              asset_name: ptr_gs_firmware_${{ matrix.targets }}_${{ github.event.inputs.releaseTag }}.bin
+              asset_path: ./build/artifact/ptr_gs_firmware_${{ matrix.targets }}_${{ github.event.inputs.releaseTag }}.zip
+              asset_name: ptr_gs_firmware_${{ matrix.targets }}_${{ github.event.inputs.releaseTag }}.zip
+              asset_content_type: application/zip
